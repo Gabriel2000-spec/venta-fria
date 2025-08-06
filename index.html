@@ -1,0 +1,330 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Control de Ventas de Helados con Ganancia</title>
+<style>
+  /* Estilos generales */
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #1a1a1a;
+    color: #f0f0f0;
+    margin: 0;
+    padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  h1 {
+    text-align: center;
+    color: #ff4500;
+    margin-bottom: 30px;
+    font-size: 2rem;
+  }
+  form {
+    width: 100%;
+    max-width: 500px;
+    background-color: #2c2c2c;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px #ff4500;
+    box-sizing: border-box;
+  }
+  label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+    font-size: 1rem;
+  }
+  select, input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    box-sizing: border-box;
+  }
+  button {
+    width: 100%;
+    padding: 12px;
+    background-color: #ff4500;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  button:hover {
+    background-color: #e03e00;
+  }
+  table {
+    width: 100%;
+    max-width: 800px;
+    margin: 30px auto 0 auto;
+    border-collapse: collapse;
+    background-color: #2c2c2c;
+    box-shadow: 0 0 10px #ff4500;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  thead {
+    display: table-header-group;
+    background-color: #ff4500;
+  }
+  th, td {
+    padding: 12px 15px;
+    text-align: center;
+    border-bottom: 1px solid #444;
+    font-size: 1rem;
+  }
+  tfoot td {
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: #ffddcc;
+  }
+  .btn-clear {
+    max-width: 800px;
+    margin: 20px auto 40px auto;
+    display: block;
+    background-color: #cc3300;
+  }
+  .btn-clear:hover {
+    background-color: #a02a00;
+  }
+
+  /* Estilos responsivos para móviles */
+  @media (max-width: 600px) {
+    body {
+      padding: 10px;
+    }
+    h1 {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+    }
+    form {
+      padding: 15px;
+      max-width: 100%;
+    }
+    label, select, input[type="number"], button {
+      font-size: 1rem;
+    }
+    table {
+      max-width: 100%;
+      font-size: 0.9rem;
+      margin-top: 20px;
+      overflow-x: auto;
+      display: block;
+      border-radius: 8px;
+    }
+    thead, tbody, tfoot, tr, th, td {
+      display: block;
+    }
+    thead tr {
+      display: none; /* Ocultar encabezado para vista móvil */
+    }
+    tbody tr {
+      margin-bottom: 15px;
+      background-color: #3a3a3a;
+      border-radius: 8px;
+      padding: 10px;
+    }
+    tbody td {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 10px;
+      border-bottom: none;
+      border-top: 1px solid #555;
+    }
+    tbody td:first-child {
+      border-top: none;
+    }
+    tbody td::before {
+      content: attr(data-label);
+      font-weight: 700;
+      color: #ff4500;
+      flex-basis: 45%;
+      text-align: left;
+    }
+    tfoot {
+      display: block;
+      margin-top: 10px;
+      font-size: 1rem;
+      color: #ffddcc;
+      background-color: #2c2c2c;
+      padding: 10px 15px;
+      border-radius: 8px;
+      max-width: 800px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    tfoot td {
+      display: flex;
+      justify-content: space-between;
+      border: none;
+      padding: 0;
+    }
+    .btn-clear {
+      max-width: 100%;
+      margin: 20px 0 40px 0;
+      font-size: 1rem;
+    }
+  }
+</style>
+</head>
+<body>
+
+<h1>Control de Ventas de Helados</h1>
+
+<form id="ventaForm">
+  <label for="tipoHelado">Tipo de Helado</label>
+  <select id="tipoHelado" required>
+    <option value="" disabled selected>Seleccione tipo</option>
+    <option value="Cono"> </option>
+    <option value="Vaso">Vaso</option>
+    <option value="Paleta">Paleta fres</option>
+    <option value="Mausi">Paleta mausi</option>
+    
+  </select>
+
+  <label for="saborHelado">Sabor</label>
+  <select id="saborHelado" required>
+    <option value="" disabled selected>Seleccione sabor</option>
+    <option value="Chocomantecado">Chocomantecado</option>
+    <option value="Chocolate">Chocolate</option>
+    <option value="Ron con pasa">Ron con pasa</option>
+    <option value="Crema">Crema</option>
+    <option value="Fresa">Fresa</option>
+    <option value="Limon">Limon</option>
+    <option value="Mantecado capa de chocolate">Mantecado capa de chocolate</option>
+     <option value="Variado">Variado</option>
+  </select>
+
+  <label for="cantidadHelado">Cantidad</label>
+  <input type="number" id="cantidadHelado" min="1" value="  " required />
+
+  <label for="precioHelado">Precio por unidad ($)</label>
+  <input type="number" id="precioHelado" min="0.01" step="0.01" value="  " required />
+
+  <label for="costoHelado">Costo por unidad ($)</label>
+  <input type="number" id="costoHelado" min="0" step="0.01" value="" required />
+
+  <button type="submit">Agregar Venta</button>
+</form>
+
+<table>
+  <thead>
+    <tr>
+      <th>Tipo</th>
+      <th>Sabor</th>
+      <th>Cantidad</th>
+      <th>Precio Unitario ($)</th>
+      <th>Costo Unitario ($)</th>
+      <th>Total ($)</th>
+      <th>Ganancia ($)</th>
+    </tr>
+  </thead>
+  <tbody id="ventasTablaBody">
+    <!-- Ventas se agregan aquí -->
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="5">Total Ventas</td>
+      <td id="totalGeneral">00.00</td>
+      <td id="totalGanancia">0.00</td>
+    </tr>
+  </tfoot>
+</table>
+
+<button class="btn-clear" id="btnBorrar">Borrar Todas las Ventas</button>
+
+<script>
+  const form = document.getElementById('ventaForm');
+  const tipoHelado = document.getElementById('tipoHelado');
+  const saborHelado = document.getElementById('saborHelado');
+  const cantidadHelado = document.getElementById('cantidadHelado');
+  const precioHelado = document.getElementById('precioHelado');
+  const costoHelado = document.getElementById('costoHelado');
+  const ventasTablaBody = document.getElementById('ventasTablaBody');
+  const totalGeneral = document.getElementById('totalGeneral');
+  const totalGanancia = document.getElementById('totalGanancia');
+  const btnBorrar = document.getElementById('btnBorrar');
+
+  const STORAGE_KEY = 'ventasHelados';
+
+  let ventas = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+
+  function actualizarTabla() {
+    ventasTablaBody.innerHTML = '';
+    let sumaTotal = 0;
+    let sumaGanancia = 0;
+
+    ventas.forEach((venta) => {
+      const fila = document.createElement('tr');
+
+      const totalVenta = venta.cantidad * venta.precio;
+      const gananciaVenta = (venta.precio - venta.costo) * venta.cantidad;
+
+      sumaTotal += totalVenta;
+      sumaGanancia += gananciaVenta;
+
+      fila.innerHTML = `
+        <td data-label="Tipo">${venta.tipo}</td>
+        <td data-label="Sabor">${venta.sabor}</td>
+        <td data-label="Cantidad">${venta.cantidad}</td>
+        <td data-label="Precio Unitario ($)">${venta.precio.toFixed(2)}</td>
+        <td data-label="Costo Unitario ($)">${venta.costo.toFixed(2)}</td>
+        <td data-label="Total ($)">${totalVenta.toFixed(2)}</td>
+        <td data-label="Ganancia ($)">${gananciaVenta.toFixed(2)}</td>
+      `;
+
+      ventasTablaBody.appendChild(fila);
+    });
+
+    totalGeneral.textContent = sumaTotal.toFixed(2);
+    totalGanancia.textContent = sumaGanancia.toFixed(2);
+  }
+
+  function guardarVentas() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(ventas));
+  }
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+
+    const nuevaVenta = {
+      tipo: tipoHelado.value,
+      sabor: saborHelado.value,
+      cantidad: parseInt(cantidadHelado.value),
+      precio: parseFloat(precioHelado.value),
+      costo: parseFloat(costoHelado.value)
+    };
+
+    ventas.push(nuevaVenta);
+    guardarVentas();
+    actualizarTabla();
+
+    cantidadHelado.value = 0;
+    precioHelado.value = 10.00;
+    costoHelado.value = 5.00;
+    tipoHelado.selectedIndex = 0;
+    saborHelado.selectedIndex = 0;
+  });
+
+  btnBorrar.addEventListener('click', () => {
+    if (confirm('¿Está seguro que desea borrar todas las ventas?')) {
+      ventas = [];
+      guardarVentas();
+      actualizarTabla();
+    }
+  });
+
+  actualizarTabla();
+</script>
+
+</body>
+</html>
